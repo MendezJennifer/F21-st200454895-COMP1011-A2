@@ -1,5 +1,6 @@
 package com.example.f21st200454895comp1011a2;
 
+import com.example.f21st200454895comp1011a2.API.ApiUtility;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("all_states_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("state_details_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("USA State Data");
         stage.setScene(scene);
@@ -20,6 +21,13 @@ public class Main extends Application {
         //Add Window Icon
         Image image= new Image(getClass().getResource("/img/icon.png").toExternalForm());
         stage.getIcons().add(image);
+
+        try {
+            ApiUtility.getStateDetails("04000US29").toString();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {

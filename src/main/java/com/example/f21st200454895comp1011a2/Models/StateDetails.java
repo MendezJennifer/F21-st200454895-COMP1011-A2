@@ -1,11 +1,20 @@
-package com.example.f21st200454895comp1011a2;
+package com.example.f21st200454895comp1011a2.Models;
+
 import com.google.gson.annotations.SerializedName;
-public class State {
-    @SerializedName("State")
-    private String state;
+
+public class StateDetails {
+
+    @SerializedName("Year")
+    private String year;
 
     @SerializedName("Foreign-Born Citizens")
     private int foreignBornCitizens;
+
+    @SerializedName("Geography")
+    private String geography;
+
+    @SerializedName("ID Geography")
+    private String idGeography;
 
     @SerializedName("Population")
     private int population;
@@ -19,12 +28,12 @@ public class State {
     @SerializedName("Citizenship Status")
     private int citizenshipStatus;
 
-    public String getState() {
-        return state;
+    public String getYear() {
+        return year;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public int getForeignBornCitizens() {
@@ -33,6 +42,22 @@ public class State {
 
     public void setForeignBornCitizens(int foreignBornCitizens) {
         this.foreignBornCitizens = foreignBornCitizens;
+    }
+
+    public String getGeography() {
+        return geography;
+    }
+
+    public void setGeography(String geography) {
+        this.geography = geography;
+    }
+
+    public String getIdGeography() {
+        return idGeography;
+    }
+
+    public void setIdGeography(String idGeography) {
+        this.idGeography = idGeography;
     }
 
     public int getPopulation() {
@@ -67,8 +92,8 @@ public class State {
         this.citizenshipStatus = citizenshipStatus;
     }
 
-    public String toString()
+    public void toString1()
     {
-        return String.format("%s - Population: %d",state,population);
+        System.out.println(String.format("%s,%s",geography,idGeography));
     }
 }
