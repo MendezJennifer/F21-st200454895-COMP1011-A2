@@ -92,8 +92,4 @@ public class StateDetails {
         this.citizenshipStatus = citizenshipStatus;
     }
 
-    public void toString1()
-    {
-        System.out.println(String.format("%s,%s",geography,idGeography));
-    }
 }

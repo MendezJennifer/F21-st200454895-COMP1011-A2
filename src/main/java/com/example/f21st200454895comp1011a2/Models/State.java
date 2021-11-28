@@ -79,7 +79,6 @@ public class State {
         this.citizenshipStatus = citizenshipStatus;
     }
 
-
     public String toString()
     {
             return String.format("%s: %,d",state,population);

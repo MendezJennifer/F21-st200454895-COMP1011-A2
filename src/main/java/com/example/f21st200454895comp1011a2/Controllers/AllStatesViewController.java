@@ -7,28 +7,29 @@ import com.example.f21st200454895comp1011a2.Models.State;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AllStatesViewController implements Initializable {
 
 @FXML
-private Label errMsgLabel;
+private Label totalPopLabel;
 
 @FXML
 private ListView<State> statesListView;
 
 @FXML
-private ComboBox<State> stateComboBox;
+private Button stateDetailsButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        errMsgLabel.setText("");
+
+        stateDetailsButton.setVisible(false);
+
         try {
             loadStatesData();
         } catch (IOException e) {
@@ -37,6 +38,10 @@ private ComboBox<State> stateComboBox;
             e.printStackTrace();
         }
 
+        statesListView.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldState, stateSelected) -> {
+                    stateDetailsButton.setVisible(true);
+                });
     }
 
     /**
@@ -49,10 +54,11 @@ private ComboBox<State> stateComboBox;
     public void loadStatesData() throws IOException, InterruptedException {
         ApiResponse apiResponse= ApiUtility.getStatesFromDataUsa();
         statesListView.getItems().addAll(apiResponse.getData());
-        stateComboBox.getItems().addAll(apiResponse.getData());
     }
+
     @FXML
-    public void viewStateDetails(ActionEvent event) throws IOException, InterruptedException {
-        SceneChanger.changeScenes(event,"state-details-view.fxml", "State Details");
+    public void viewStateDetails(ActionEvent event) throws IOException {
+        String stateID=statesListView.getSelectionModel().getSelectedItem().getStateID();
+        SceneChanger.changeScenes(event,"state-details-view.fxml", stateID);
     }
 }

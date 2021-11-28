@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class StateDetailsViewController implements Initializable {
+public class StateDetailsViewController {
     @FXML
     private Label stateNameLabel;
 
@@ -36,17 +36,6 @@ public class StateDetailsViewController implements Initializable {
     @FXML
     private Label yearDataLabel;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            loadStateDetails("04000US28");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //stateNameLabel.setText("HEY");
-    }
 
     /**
      * This method takes the geographyID, calls the API/JSON,
@@ -54,10 +43,9 @@ public class StateDetailsViewController implements Initializable {
      */
     private void loadStateDetails(String geographyID) throws IOException, InterruptedException {
         ApiResponseStateDetails apiResponseStateDetails=ApiUtility.getStateDetails(geographyID);
-        System.out.println(apiResponseStateDetails.getData()[0].getGeography());
 
         stateNameLabel.setText(apiResponseStateDetails.getData()[0].getGeography());
-         populationLabel.setText(String.valueOf(apiResponseStateDetails.getData()[0].getPopulation()));
+        populationLabel.setText(String.valueOf(apiResponseStateDetails.getData()[0].getPopulation()));
 
         numForeignCitLabel.setText(Integer.toString(apiResponseStateDetails.getData()[0].getForeignBornCitizens()));
 
@@ -73,7 +61,7 @@ public class StateDetailsViewController implements Initializable {
 
     @FXML
     public void allStatesView(ActionEvent event) throws IOException, InterruptedException {
-        SceneChanger.changeScenes(event,"all-states-view.fxml", "State Details");
+        SceneChanger.changeScenes(event,"all-states-view.fxml");
     }
 
 }

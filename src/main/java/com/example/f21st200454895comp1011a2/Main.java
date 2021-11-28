@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("state_details_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("all_states_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("USA State Data");
         stage.setScene(scene);
@@ -22,15 +22,9 @@ public class Main extends Application {
         Image image= new Image(getClass().getResource("/img/icon.png").toExternalForm());
         stage.getIcons().add(image);
 
-        try {
-            ApiUtility.getStateDetails("04000US29").toString();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(new String[0]);
     }
 }
