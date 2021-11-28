@@ -51,6 +51,7 @@ public class StateDetailsViewController implements InitializeState {
             e.printStackTrace();
         }
 
+        //Use API data to populate labels
         stateNameLabel.setText(apiResponseStateDetails.getData()[0].getGeography());
 
         populationLabel.setText(String.format("%,d",apiResponseStateDetails.getData()[0].getPopulation()));
