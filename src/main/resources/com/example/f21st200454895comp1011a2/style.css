@@ -1,7 +1,7 @@
 .root
 {
     -fx-background-color: linear-gradient(#ff8503,#f5af64,#ff8503);
-    -fx-font-size: 14pt;
+    -fx-font-size: 16pt;
 }
 .label
 {
@@ -13,6 +13,19 @@
     -fx-font-size: 30pt;
 }
 #selectSate
+{
+    -fx-font-size: 14pt;
+}
+#stateDetailsBackground
+{
+    -fx-background-color:#ff891f;
+}
+#usaMap
+{
+    -fx-pref-width: 470;
+    -fx-pref-height: 336;
+}
+#button, #stateDetailsButton
 {
     -fx-font-size: 14pt;
 }

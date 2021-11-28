@@ -84,5 +84,4 @@ public class State {
             return String.format("%s: %,d",state,population);
     }
 
-
 }

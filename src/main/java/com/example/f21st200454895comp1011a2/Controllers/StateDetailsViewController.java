@@ -1,20 +1,17 @@
 package com.example.f21st200454895comp1011a2.Controllers;
 
-import com.example.f21st200454895comp1011a2.API.ApiResponse;
 import com.example.f21st200454895comp1011a2.API.ApiResponseStateDetails;
 import com.example.f21st200454895comp1011a2.API.ApiUtility;
-import com.example.f21st200454895comp1011a2.Models.StateDetails;
+import com.example.f21st200454895comp1011a2.InitializeState;
 import com.example.f21st200454895comp1011a2.SceneChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class StateDetailsViewController {
+public class StateDetailsViewController implements InitializeState {
     @FXML
     private Label stateNameLabel;
 
@@ -36,32 +33,42 @@ public class StateDetailsViewController {
     @FXML
     private Label yearDataLabel;
 
+    @FXML
+    private ComboBox statesComboBox;
+
 
     /**
      * This method takes the geographyID, calls the API/JSON,
      * and creates a StateDetails object to populate the GUI
      */
-    private void loadStateDetails(String geographyID) throws IOException, InterruptedException {
-        ApiResponseStateDetails apiResponseStateDetails=ApiUtility.getStateDetails(geographyID);
+    public void loadStateDetails(String stateID) {
+        ApiResponseStateDetails apiResponseStateDetails= null;
+        try {
+            apiResponseStateDetails = ApiUtility.getStateDetails(stateID);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         stateNameLabel.setText(apiResponseStateDetails.getData()[0].getGeography());
-        populationLabel.setText(String.valueOf(apiResponseStateDetails.getData()[0].getPopulation()));
 
-        numForeignCitLabel.setText(Integer.toString(apiResponseStateDetails.getData()[0].getForeignBornCitizens()));
+        populationLabel.setText(String.format("%,d",apiResponseStateDetails.getData()[0].getPopulation()));
+        numForeignCitLabel.setText(String.format("%,d",apiResponseStateDetails.getData()[0].getForeignBornCitizens()));
 
-        householdIncomeLabel.setText(Integer.toString(apiResponseStateDetails.getData()[0].getHouseholdIncomeByRace()));
+        householdIncomeLabel.setText(String.format("%,d",apiResponseStateDetails.getData()[0].getHouseholdIncomeByRace()));
 
-        commuteTimeLabel.setText(Double.toString(apiResponseStateDetails.getData()[0].getAverageCommuteTime()));
+        commuteTimeLabel.setText(Double.toString(apiResponseStateDetails.getData()[0].getAverageCommuteTime()).substring(0,Double.toString(apiResponseStateDetails.getData()[0].getAverageCommuteTime()).indexOf(".")+5));
 
-        totalCitizensLabel.setText(Integer.toString(apiResponseStateDetails.getData()[0].getCitizenshipStatus()));
+        totalCitizensLabel.setText(String.format("%,d",apiResponseStateDetails.getData()[0].getCitizenshipStatus()));
 
         yearDataLabel.setText(apiResponseStateDetails.getData()[0].getYear());
 
     }
 
     @FXML
-    public void allStatesView(ActionEvent event) throws IOException, InterruptedException {
-        SceneChanger.changeScenes(event,"all-states-view.fxml");
+    public void allStatesView(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event,"all_states_view.fxml");
     }
 
 }

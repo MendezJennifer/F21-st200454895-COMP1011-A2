@@ -1,7 +1,5 @@
 package com.example.f21st200454895comp1011a2.API;
 
-import com.example.f21st200454895comp1011a2.API.ApiResponse;
-import com.example.f21st200454895comp1011a2.Models.StateDetails;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -11,26 +9,24 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class ApiUtility {
 
     /**
      * Method that reads the "jsonData.json" file (in the root directory) and creates an ApiResponse object
      */
-    public static ApiResponse getStatesJsonFile()
+    public static ApiResponseAllStates getStatesJsonFile()
     {
         //create a GSON object
         Gson gson = new Gson();
-        ApiResponse response = null;
+        ApiResponseAllStates response = null;
 
         try(
                 FileReader fileReader = new FileReader("jsonDataResponse.json");
                 JsonReader jsonReader = new JsonReader(fileReader);
         )
         {
-            response = gson.fromJson(jsonReader, ApiResponse.class);
+            response = gson.fromJson(jsonReader, ApiResponseAllStates.class);
         }
         catch (Exception e)
         {
@@ -43,7 +39,7 @@ public class ApiUtility {
      * Method that calls the US Data Api, will display State name and population
      * Will store the API Response to a String and then create objects
      */
-    public static ApiResponse getStatesFromDataUsa() throws IOException, InterruptedException {
+    public static ApiResponseAllStates getStatesFromDataUsa() throws IOException, InterruptedException {
         //searchTerm = searchTerm.trim().replace(" ", "%20");
         //searchTerm = searchTerm.toLowerCase();
 
@@ -68,16 +64,16 @@ public class ApiUtility {
         String jsonString =response.body();
 
         Gson gson = new Gson();
-        ApiResponse apiResponse = null;
+        ApiResponseAllStates apiResponseAllStates = null;
 
         try{
-            apiResponse  = gson.fromJson(jsonString, ApiResponse.class);
+            apiResponseAllStates = gson.fromJson(jsonString, ApiResponseAllStates.class);
         }catch(Exception e)
         {
             e.printStackTrace();
         }
 
-        return apiResponse;
+        return apiResponseAllStates;
    }
 
     /**
@@ -110,6 +106,43 @@ public class ApiUtility {
 
         try{
             apiResponse  = gson.fromJson(jsonString, ApiResponseStateDetails.class);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return apiResponse;
+
+    }
+
+    /**
+     * Method that calls the US Data Api, will display the total population of the country
+     * Will store the API Response to a String and then create objects
+     */
+    public static ApiResponseCountry getCountryFromDataUsa() throws IOException, InterruptedException {
+
+        String uri="https://datausa.io/api/data?&measures=Population&year=latest";
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
+/*
+        //Send the API results to a file (jsonDataResponse.json)
+        HttpResponse<Path> response = client.send(httpRequest, HttpResponse.BodyHandlers
+                                                    .ofFile(Paths.get("jsonDataResponse.json")));
+
+
+        return getStatesJsonFile();
+*/
+        //Store the API response to a String and then use it to create objects
+        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+        String jsonString =response.body();
+
+        Gson gson = new Gson();
+        ApiResponseCountry apiResponse = null;
+
+        try{
+            apiResponse  = gson.fromJson(jsonString, ApiResponseCountry.class);
         }catch(Exception e)
         {
             e.printStackTrace();

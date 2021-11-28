@@ -2,6 +2,8 @@ package com.example.f21st200454895comp1011a2.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DecimalFormat;
+
 public class StateDetails {
 
     @SerializedName("Year")

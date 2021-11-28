@@ -1,6 +1,7 @@
 package com.example.f21st200454895comp1011a2.Controllers;
 
-import com.example.f21st200454895comp1011a2.API.ApiResponse;
+import com.example.f21st200454895comp1011a2.API.ApiResponseCountry;
+import com.example.f21st200454895comp1011a2.API.ApiResponseAllStates;
 import com.example.f21st200454895comp1011a2.API.ApiUtility;
 import com.example.f21st200454895comp1011a2.SceneChanger;
 import com.example.f21st200454895comp1011a2.Models.State;
@@ -11,7 +12,6 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AllStatesViewController implements Initializable {
@@ -32,6 +32,7 @@ private Button stateDetailsButton;
 
         try {
             loadStatesData();
+            loadCountryData();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -46,19 +47,29 @@ private Button stateDetailsButton;
 
     /**
      * Will Retrieve data from API and display all states and their population on a listView
-     * Will also populate a combobox with state names
      * @throws IOException
      * @throws InterruptedException
      */
     @FXML
     public void loadStatesData() throws IOException, InterruptedException {
-        ApiResponse apiResponse= ApiUtility.getStatesFromDataUsa();
-        statesListView.getItems().addAll(apiResponse.getData());
+        ApiResponseAllStates apiResponseAllStates = ApiUtility.getStatesFromDataUsa();
+        statesListView.getItems().addAll(apiResponseAllStates.getData());
+    }
+
+    /**
+     * Will Retrieve data from API and display USA's total population
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    @FXML
+    public void loadCountryData() throws IOException, InterruptedException {
+        ApiResponseCountry apiResponseCountry=ApiUtility.getCountryFromDataUsa();
+        totalPopLabel.setText("USA Total Population: "+apiResponseCountry.getData()[0].toString());
     }
 
     @FXML
     public void viewStateDetails(ActionEvent event) throws IOException {
         String stateID=statesListView.getSelectionModel().getSelectedItem().getStateID();
-        SceneChanger.changeScenes(event,"state-details-view.fxml", stateID);
+        SceneChanger.changeScenes(event,"state_details_view.fxml", stateID);
     }
 }

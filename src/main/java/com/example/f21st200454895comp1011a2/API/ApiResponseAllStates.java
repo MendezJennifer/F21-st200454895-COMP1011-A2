@@ -2,7 +2,10 @@ package com.example.f21st200454895comp1011a2.API;
 
 import com.example.f21st200454895comp1011a2.Models.State;
 
-public class ApiResponse {
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ApiResponseAllStates {
 
     private State[] data;
 
@@ -13,5 +16,6 @@ public class ApiResponse {
     public void setData(State[] data) {
         this.data = data;
     }
+
 
 }
