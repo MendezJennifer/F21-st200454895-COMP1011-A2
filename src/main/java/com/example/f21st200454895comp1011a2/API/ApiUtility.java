@@ -17,7 +17,6 @@ public class ApiUtility {
      */
     public static ApiResponseAllStates getStatesJsonFile()
     {
-        //create a GSON object
         Gson gson = new Gson();
         ApiResponseAllStates response = null;
 
@@ -40,8 +39,6 @@ public class ApiUtility {
      * Will store the API Response to a String and then create objects
      */
     public static ApiResponseAllStates getStatesFromDataUsa() throws IOException, InterruptedException {
-        //searchTerm = searchTerm.trim().replace(" ", "%20");
-        //searchTerm = searchTerm.toLowerCase();
 
         String uri="https://datausa.io/api/data?drilldowns=State&measures=Foreign-Born%20Citizens,Population,Household%20Income%20by%20Race,Average%20Commute%20Time,Citizenship%20Status";
 
@@ -81,8 +78,6 @@ public class ApiUtility {
      * Will store the API Response to a String and then create objects
      */
     public static ApiResponseStateDetails getStateDetails(String idGeography) throws IOException, InterruptedException {
-        //searchTerm = searchTerm.trim().replace(" ", "%20");
-        //searchTerm = searchTerm.toLowerCase();
 
         String uri="https://datausa.io/api/data?&measures=Foreign-Born%20Citizens,Population,Household%20Income%20by%20Race,Average%20Commute%20Time,Citizenship%20Status&year=latest&Geography="+idGeography;
 

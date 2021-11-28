@@ -39,6 +39,7 @@ private Button stateDetailsButton;
             e.printStackTrace();
         }
 
+        //Check if there is a state selected, if yes then display the button for state details
         statesListView.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldState, stateSelected) -> {
                     stateDetailsButton.setVisible(true);
@@ -57,7 +58,7 @@ private Button stateDetailsButton;
     }
 
     /**
-     * Will Retrieve data from API and display USA's total population
+     * Will Retrieve data from API and display USA's total population on a label
      * @throws IOException
      * @throws InterruptedException
      */
