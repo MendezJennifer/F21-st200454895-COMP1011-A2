@@ -33,12 +33,9 @@ public class StateDetailsViewController implements InitializeState {
     @FXML
     private Label yearDataLabel;
 
-    @FXML
-    private ComboBox statesComboBox;
-
 
     /**
-     * This method takes the geographyID, calls the API/JSON,
+     * This method takes the stateID, calls the API/JSON,
      * and creates a StateDetails object to populate the GUI
      */
     public void loadStateDetails(String stateID) {

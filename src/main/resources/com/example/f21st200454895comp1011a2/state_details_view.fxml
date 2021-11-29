@@ -52,7 +52,7 @@
                </padding>
             </GridPane>
             <HBox alignment="CENTER" />
-            <Button fx:id="button" mnemonicParsing="false" onAction="#allStatesView" text="Return to Search">
+            <Button fx:id="button" mnemonicParsing="false" onAction="#allStatesView" text="Return to State List">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin></Button>

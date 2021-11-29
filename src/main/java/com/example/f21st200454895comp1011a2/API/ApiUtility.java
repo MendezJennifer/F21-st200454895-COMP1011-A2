@@ -35,7 +35,7 @@ public class ApiUtility {
     }
 
     /**
-     * Method that calls the US Data Api, will display State name and population
+     * Method that calls the US Data API, will display State name and population
      * Will store the API Response to a String and then create objects
      */
     public static ApiResponseAllStates getStatesFromDataUsa() throws IOException, InterruptedException {
@@ -74,7 +74,7 @@ public class ApiUtility {
    }
 
     /**
-     * Method that calls the US Data Api, will display the population details of the selected state
+     * Method that calls the US Data Api, will display details for the selected state
      * Will store the API Response to a String and then create objects
      */
     public static ApiResponseStateDetails getStateDetails(String idGeography) throws IOException, InterruptedException {
