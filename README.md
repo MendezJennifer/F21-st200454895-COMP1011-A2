@@ -1,7 +1,20 @@
-# F21-st200454895-COMP1011-A2
-#COMP 1011 - Object Oriented Programming - Java
+#State Population Information
 Assignment 2
-Data USA API https://datausa.io/about/api/
+COMP 1011: Object Oriented Programming - Java
+
+Java based application that connects to an API to display population information about the United States.
+
+This application pulls data from the API to display the total population of the United States.
+It allows the user to select a State to display more information such as:
+•	Total State Population
+•	Number of Foreign-Born Citizens
+•	Household Income
+•	Average Commute Time
+•	Citizenship Status
+
+
+API Data
+Data USA API: https://datausa.io/about/api/
 
 Data for country population: https://datausa.io/api/data?&measures=Population&year=latest
 
